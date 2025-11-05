@@ -109,6 +109,7 @@
                 <Property Name="InProcessByUserDescription" Type="Edm.String" Nullable="false" MaxLength="80"/>
             </EntityType>
             <ComplexType Name="MarketIHOperationControl">
+                <Property Name="addRate" Type="Edm.Boolean" Nullable="false"/>
                 <Property Name="checkExpirationDate" Type="Edm.Boolean" Nullable="false"/>
                 <Property Name="Edit" Type="Edm.Boolean" Nullable="false"/>
             </ComplexType>
@@ -136,6 +137,11 @@
             <Action Name="Prepare" IsBound="true">
                 <Parameter Name="_it" Type="com.sap.gateway.srvd.zui_market_ih_o4.v0001.MarketIHType" Nullable="false"/>
             </Action>
+            <Action Name="addRate" EntitySetPath="_it" IsBound="true">
+                <Parameter Name="_it" Type="com.sap.gateway.srvd.zui_market_ih_o4.v0001.MarketIHType" Nullable="false"/>
+                <Parameter Name="rating" Type="Edm.Int32" Nullable="false"/>
+                <ReturnType Type="com.sap.gateway.srvd.zui_market_ih_o4.v0001.MarketIHType" Nullable="false"/>
+            </Action>
             <Action Name="checkExpirationDate" EntitySetPath="_it" IsBound="true">
                 <Parameter Name="_it" Type="com.sap.gateway.srvd.zui_market_ih_o4.v0001.MarketIHType" Nullable="false"/>
                 <ReturnType Type="com.sap.gateway.srvd.zui_market_ih_o4.v0001.MarketIHType" Nullable="false"/>
@@ -155,10 +161,9 @@
                 </EntitySet>
             </EntityContainer>
             <Annotations Target="SAP__self.MarketIHType/ID">
-                <Annotation Term="SAP__common.Label" String="ID"/>
                 <Annotation Term="SAP__core.Computed"/>
                 <Annotation Term="SAP__UI.Hidden"/>
-                <Annotation Term="SAP__common.Heading" String="UUID"/>
+                <Annotation Term="SAP__common.Label" String="UUID"/>
                 <Annotation Term="SAP__common.QuickInfo" String="16 Byte UUID in 16 Bytes (Raw Format)"/>
             </Annotations>
             <Annotations Target="SAP__self.MarketIHType/Product">
@@ -254,10 +259,6 @@
                 </Annotation>
                 <Annotation Term="SAP__UI.Identification">
                     <Collection>
-                        <Record Type="SAP__UI.DataField">
-                            <PropertyValue Property="Label" String="ID"/>
-                            <PropertyValue Property="Value" Path="ID"/>
-                        </Record>
                         <Record Type="SAP__UI.DataField">
                             <PropertyValue Property="Label" String="Product"/>
                             <PropertyValue Property="Criticality" Path="StatusCriticality"/>
@@ -392,7 +393,6 @@
                 </Annotation>
                 <Annotation Term="SAP__UI.SelectionFields">
                     <Collection>
-                        <PropertyPath>ID</PropertyPath>
                         <PropertyPath>Product</PropertyPath>
                         <PropertyPath>Category</PropertyPath>
                         <PropertyPath>Brand</PropertyPath>
@@ -564,6 +564,12 @@
             </Annotations>
             <Annotations Target="SAP__self.Edit(SAP__self.MarketIHType)">
                 <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/Edit"/>
+            </Annotations>
+            <Annotations Target="SAP__self.addRate(SAP__self.MarketIHType)/rating">
+                <Annotation Term="SAP__common.Label" String="Add new raiting"/>
+            </Annotations>
+            <Annotations Target="SAP__self.addRate(SAP__self.MarketIHType)">
+                <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/addRate"/>
             </Annotations>
             <Annotations Target="SAP__self.checkExpirationDate(SAP__self.MarketIHType)">
                 <Annotation Term="SAP__core.OperationAvailable" Path="_it/__OperationControl/checkExpirationDate"/>
@@ -767,6 +773,11 @@
             </Annotations>
             <Annotations Target="SAP__self.I_DraftAdministrativeDataType/LastChangeDateTime">
                 <Annotation Term="SAP__common.Label" String="Draft Last Changed On"/>
+            </Annotations>
+            <Annotations Target="SAP__self.MarketIHOperationControl/addRate">
+                <Annotation Term="SAP__common.Label" String="Dyn. Action Control"/>
+                <Annotation Term="SAP__common.Heading" String="Dynamic Action Control"/>
+                <Annotation Term="SAP__common.QuickInfo" String="Dynamic Action Property"/>
             </Annotations>
             <Annotations Target="SAP__self.MarketIHOperationControl/checkExpirationDate">
                 <Annotation Term="SAP__common.Label" String="Dyn. Action Control"/>
