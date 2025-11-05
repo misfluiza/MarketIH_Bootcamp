@@ -137,7 +137,23 @@
           "options": {
             "settings": {
               "editableHeaderContent": false,
-              "contextPath": "/MarketIH"
+              "contextPath": "/MarketIH",
+              "content": {
+                "header": {
+                  "actions": {
+                    "countexpire": {
+                      "press": "marketih.ext.controller.Expiration.onExpirePress",
+                      "visible": true,
+                      "enabled": true,
+                      "text": "Days Until Expiration",
+                      "position": {
+                        "placement": "After",
+                        "anchor": "DataFieldForAction::com.sap.gateway.srvd.zui_market_ih_o4.v0001.checkExpirationDate::com.sap.gateway.srvd.zui_market_ih_o4.v0001.MarketIHType"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
